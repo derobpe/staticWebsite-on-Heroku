@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: #306D85;
+        }
+    
+        *, *:before, *:after {
+            box-sizing: border-box;
+        }
+        
+        .sea {
+            margin: 40px auto 0 auto;
+            overflow: hidden;
+        }
+        .sea .circle-wrapper{
+            position: relative;
+            width: 300px;
+            height: 300px;
+            border: 6px solid #3e8caa;
+            border-radius: 50%;
+            background-color: -webkit-gradient(linear, left top, left bottom, from (#2c647a), to(#204858));
+            background: linear-gradient(#2c647a,#204858);
+            margin:10px auto 0 auto;
+            overflow: hidden;
+            z-index: 0;
+            padding: 0 50px 0 50px;
+        }
+
+        .sea .bubble{
+            position: absolute;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            top:100px;
+            left:100px;
+            background-color: #6bafca;
+            opacity: 0.9;
+            animation: bubble1-h-movement 1s ease-in infinite, 
+            bubble1-v-movement 300ms ease-in-out infinite alternate,
+            bubble-scale-movement 300ms ease-in-out infinite alternate;
+            
+        }
+
+        .sea .bubble:after{ /*sobre mi mismo vuelveme a crear*/
+            position: absolute;
+            content:""; /*content siempre tiene que tener algo*/
+            width: 9px;
+            height: 9px;
+            top: -20px;
+            left: 100px;
+            border-radius: 50%;
+            background-color: #6bafca;
+        }
+
+        .submarine-body{
+            background-color: #D93A54;
+            border-radius: 40px;
+            position: absolute;
+            width: 150px;
+            height: 80px;
+            top: 50px;
+            left: 25px;
+            background: linear-gradient(#D93A54, #bc243d);
+        }
+
+        .light{
+            position:absolute;
+            width: 0px;
+            height: 0px;
+            border-style: solid;
+            border-width: 0px 40px 150px 40px;
+            border-color: transparent transparent #377c98 transparent;
+            transform: rotate(-50deg);
+            top:40px;
+            left:99%;
+        }
+
+        .light:after {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 13px;
+            border-radius: 5px;
+            background-color: #d12844;
+            margin-left: -10px;
+        }
+
+        .window{
+            position: absolute;
+            width: 37px;
+            height: 37px;
+            top: 23px;
+            right: 18px;
+            background: linear-gradient(#1e4554, #183642);
+            border-radius: 50%;
+            border: 3px solid #D93A54;
+        }
+        .window:after {
+            content: "";
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background-color: transparent;
+            opacity:0.8;
+            border-top: 3px solid white;
+            left: 3px;
+            top: 3px;
+            transform: rotate(-45deg)
+        }
+
+        .submarine-wrapper {
+            position: absolute;
+            animation: diving 3s ease-in-out infinite, diving-rotate 3s ease-in-out infinite;
+        }
+
+        .engine {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            top: 28px;
+            right: 70px;
+            background-color: #d12844;
+            border-radius: 50%;
+            border: 5px solid #D93A54;
+            animation:spin 900ms linear infinite;
+        }
+
+        .engine:after {
+            position: absolute;
+            content:"";
+            top: 9px;
+            width: 22px;
+            height: 4px;
+            border-radius: 2px;
+            background-color: white;
+            
+        }
+        
+        .engine:before {
+            position: absolute;
+            content:"";
+            left: 9px;
+            width: 4px;
+            height: 22px;
+            border-radius: 2px;
+            background-color: white;
+        }
+
+        .helix {
+            position: absolute;
+            width: 30px;
+            height: 70px;
+            top: 55px;
+            left:0;
+            background-color: #d12844;
+            border-radius: 7px;
+            background: linear-gradient(black, darken(white, 10%));
+        }
+
+        .helix:after {
+            position:absolute;
+            content:"";
+            top: 5px;
+            left: 7px;
+            width: 17px;
+            height: 60px;
+            background: linear-gradient(
+                to bottom, #D93A54,
+                #D93A54 50%, #e57a8c 50%, #e57a8c);
+            background-size: 100% 10px;
+            animation: helix-movement 20ms linear infinite;
+
+        }
+
+        .hat {
+            position: absolute;
+            width: 65px;
+            height: 25px;
+            top: 26px;
+            left: 70px;
+            background-color: #D93A54;
+            border-radius: 10px 10px 0 0;
+            background: linear-gradient(#D93A54, #d72d49);
+        }
+
+        .periscope {
+            position: absolute;
+            width: 7px;
+            height: 20px;
+            background-color: #D93A54;
+            top: -20px;
+            left: 32px;
+            border-radius: 5px 5px 0 0;
+        }
+        .periscope:after {
+            content: "";
+            position: absolute;
+            width: 15px;
+            height: 7px;
+            background-color: #D93A54;
+            border-radius: 5px;
+        }
+        
+        .leds-wrapper {
+            width: 53px;
+            height: 13px;
+            position: relative;
+            top: 7px;
+            left: 7px;
+            background-color: #D93A54;
+            border-radius: 10px;
+            background: linear-gradient(#b3233a, #a21f35);
+        }
+
+        .leds {
+            position: absolute;
+            top:4px;
+            left:7px;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background-color: white;
+            animation: leds-off 500ms linear infinite;
+        }
+        .leds::after, .leds::before{
+            content: "";
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background-color: white;
+        }
+        .leds:after{
+            top:0px;
+            left:17px;
+        }
+        
+        .leds:before{
+            top:0px;
+            left:34px;
+            
+        }
+
+        @keyframes bubble1-h-movement{
+            from {left:100%}
+            to {left:0%}
+        }
+
+        
+        @keyframes bubble1-v-movement{
+            from {top:130px}
+            to {top:150px}
+        }
+
+
+        @keyframes bubble-scale-movement{
+            from {transform: scale(1.4)}
+            to {transform: scale(0.9)}
+        }
+
+        @keyframes diving{
+            0% {
+                    top:40px;
+                }
+            50% {
+                    top:60px;
+                }
+            100% {
+                    top:40px;
+                }
+        }
+
+        @keyframes diving-rotate {
+            0% {
+                transform:rotate(0deg); 
+                }
+            50% {
+                transform:rotate(3deg); 
+                }
+            75% {
+                transform:rotate(-2deg); 
+                }
+            100% {
+                transform:rotate(0deg); 
+                }
+        }
+        @keyframes spin { 
+            100% { 
+                transform:rotate(360deg); 
+                } 
+            }
+        
+        @keyframes helix-movement {
+            100% {
+                background: linear-gradient(
+                to bottom, #e57a8c,
+                #e57a8c 50%, #D93A54 50%, #D93A54);
+                background-size: 100% 10px;
+            }
+        }
+
+        @keyframes leds-off {
+            100% {
+                opacity: 0.3;
+            }
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <div class="sea">
+        <div class="circle-wrapper">
+            <div class="bubble"></div>
+            <div class="submarine-wrapper">
+                <div class="submarine-body">
+                    <div class = "window"></div>
+                    <div class = "engine"></div>
+                    <div class = "light"></div>
+                </div>
+                <div class="helix"></div>
+                <div class="hat">
+                    <div class = "periscope"></div>
+                    <div class = "leds-wrapper">
+                        <div class = "leds"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+</body>
+</html>
