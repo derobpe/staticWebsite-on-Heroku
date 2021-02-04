@@ -14,7 +14,7 @@ A small little trick to get Heroku to recognize the files of your static website
 
 Submarine with CSS
 ------------------
-Result: 
+Result: https://staticwebsite-submarine.herokuapp.com/
 
 Trying to replicate a [Pen](https://codepen.io/ajerez/pen/EaEEOW) by [Alberto Jerez](https://codepen.io/ajerez) on [CodePen](https://codepen.io).
 
