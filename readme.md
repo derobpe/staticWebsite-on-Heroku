@@ -1,8 +1,14 @@
 # Heroku supported buildpacks
-Listed on the Heroku reference page, the supported buildpacks offered are: Ruby, Node.js, Clojure, Python, Java, Gradle, Grails, Scala, Play, PHP, Go. These buildpacks are searched within the deployed repo based on the specified language used. However, the buildpacks are not offered for the typical HTML, CSS, Javascript languages. This explains the error you received: “no default language could be detected for this app”.
+Listed on the Heroku reference page, the supported buildpacks offered are: Ruby, Node.js, Clojure, Python, Java, Gradle, Grails, Scala, Play, PHP, Go. 
+
+These buildpacks are searched within the deployed repo based on the specified language used. 
+
+However, the buildpacks are not offered for the typical HTML, CSS, Javascript languages. 
+
+This explains the error received trying to deploying a HTML: “no default language could be detected for this app”.
 
 ## Solution --> PHP
-A small little trick to get Heroku to recognize the files of your static website is to trick it into being a PHP app. Yup, PHP.
+A small little trick to get Heroku to recognize the files of your static website is to trick it into being a PHP app.
 
 ## Steps
 1. Head to the root directory of your project that contains index.html (the main HTML page).
